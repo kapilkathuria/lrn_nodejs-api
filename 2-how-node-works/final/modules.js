@@ -1,3 +1,4 @@
+// arguments  - these are arguments wrapper function
 // console.log(arguments);
 // console.log(require("module").wrapper);
 

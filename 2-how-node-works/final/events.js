@@ -1,6 +1,7 @@
 const EventEmitter = require("events");
 const http = require("http");
 
+// this is  how http and many other modules use EventEmitter class
 class Sales extends EventEmitter {
   constructor() {
     super();
@@ -9,6 +10,7 @@ class Sales extends EventEmitter {
 
 const myEmitter = new Sales();
 
+// we can setup multiple listeners for same event
 myEmitter.on("newSale", () => {
   console.log("There was a new sale!");
 });

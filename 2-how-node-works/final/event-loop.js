@@ -17,6 +17,8 @@ fs.readFile("test-file.txt", () => {
 
   process.nextTick(() => console.log("Process.nextTick"));
 
+  // pbkdf2Sync - runs in Sync
+  // user pbkdf2 - this one should be used as this runs async
   crypto.pbkdf2Sync("password", "salt", 100000, 1024, "sha512");
   console.log(Date.now() - start, "Password encrypted");
 
@@ -30,4 +32,6 @@ fs.readFile("test-file.txt", () => {
   console.log(Date.now() - start, "Password encrypted");
 });
 
+// this will run first as all other functions above are running in event loop
+// other functions above are running in different loops and hence won't run in any particular order
 console.log("Hello from the top-level code");
