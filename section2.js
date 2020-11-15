@@ -30,3 +30,21 @@
 
 // async nature
 // blocking and non blocking
+
+// routing
+// if (pathname === '/' || pathname === '/overview') {
+// res.writeHead(200, {
+//     'Content-type': 'text/html'
+//   });
+
+// html templating
+// a template is created in html where actual data can be filled later
+// see 1-node-farm/final/templates/template-product.html and other html files in this folder
+
+// packgae versioning
+// ^: carrot: allows install of latest Minor version release
+// ~: allows install of latest Patch release
+// *: allows install of latest Major version release. this is not used usually
+
+// using prettier
+// intall and change configuration in settings
