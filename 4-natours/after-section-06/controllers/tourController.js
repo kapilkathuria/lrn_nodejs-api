@@ -4,6 +4,7 @@ const tours = JSON.parse(
   fs.readFileSync(`${__dirname}/../dev-data/data/tours-simple.json`)
 );
 
+// let's check if tour id exists
 exports.checkID = (req, res, next, val) => {
   console.log(`Tour id is: ${val}`);
 
