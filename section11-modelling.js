@@ -40,3 +40,22 @@
 // 2. data access pattern: how data is read and written
 // 3. data closeness: how much the data is related, how we want to query
 // 
+
+// 4. types of referencing
+// there are 3 types
+// a) child referencing: 1:few. movie to actor can be child reference. a movie can refer to multiple actors
+// b) parent referecing: 1:many or 1:ton. if there are huge no. of childs, a child can refer to parent. 
+//      parent doesn't know any child.
+// c) 2 way referencing: many:many. 
+
+// general guidleines
+// 1. Identify the questions that arise from your appliation's use cases first and then model your data so that 
+//      questions can be ansered in most efficient way
+// 2. embedding
+//      in general always favor embedding unless good reasons for referencing
+//      when data is mostly read but rarely updated, and dataset are close
+// 3. referencing
+//      1:TON and many:many are good reason for referencing
+//      if data is updated a lot 
+//      if you need to access dataset a lot on it's own
+//      child ref: 1:few ; parent: 1:many, 1:ton ; 2way: many:many
