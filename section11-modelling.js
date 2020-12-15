@@ -59,3 +59,18 @@
 //      if data is updated a lot 
 //      if you need to access dataset a lot on it's own
 //      child ref: 1:few ; parent: 1:many, 1:ton ; 2way: many:many
+
+// sample data models for natures app
+// collections: tours and users - these two are completly separate
+// other collections: reviews, locations, bookings
+// relationship: 
+//      users: reviews --> 1:many --> parent referencing (review will keep reference of user)
+//      tours: review --> same as above
+//      tours: location --> few:few  or many:many --> embedding or 2 way referencing but author decided to embed 
+//              because there are few locations
+//      tours: users --> users to tour guide . few:few . bit tricky child referencing or embedding could work
+//      booking:users --> 1:many . parent referencing
+//      booking: tours --> 1:many . same as above
+
+// geospatial data in mongodb
+// mongodb supports geospatial out of box
