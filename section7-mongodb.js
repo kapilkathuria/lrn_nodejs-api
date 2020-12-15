@@ -1,6 +1,17 @@
 // Introduction to Mongodb
+// NoSQL DB.  Sql are traditional.
+// collections are like table.
+// collectins can contain a document - docoument is like row in table
 
+// key features
+// document based database- field:value pair
+// scalability: data can be distributed
+// flexible: no need to define schema. each document can have different fields
+// performance: embedded data models, indexing, sharding make it performant
+// free and open source
 
+// BSON
+// mongodb uses BSON which is JSON with type defined for data
 
 
 
