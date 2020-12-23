@@ -90,6 +90,9 @@ tourSchema.virtual('durationWeeks').get(function() {
 });
 
 // DOCUMENT MIDDLEWARE: runs before .save() and .create()
+//  but not on insterMany
+//  in pre - 'this' has access to current document which is being processed
+//  this is just befor being saved
 tourSchema.pre('save', function(next) {
   this.slug = slugify(this.name, { lower: true });
   next();

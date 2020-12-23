@@ -129,6 +129,7 @@ exports.getTourStats = async (req, res) => {
         }
       },
       {
+        // 1 below means ascending
         $sort: { avgPrice: 1 }
       }
       // {

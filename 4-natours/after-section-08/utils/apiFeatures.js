@@ -11,6 +11,9 @@ class APIFeatures {
 
     // 1B) Advanced filtering
     let queryStr = JSON.stringify(queryObj);
+    // /\b(gte|gt|lte|lt)\b/g - regex
+    // \b - means match extact
+    // /g - replace all matching
     queryStr = queryStr.replace(/\b(gte|gt|lte|lt)\b/g, match => `$${match}`);
 
     this.query = this.query.find(JSON.parse(queryStr));
@@ -41,6 +44,7 @@ class APIFeatures {
   }
 
   paginate() {
+    // || means default  value
     const page = this.queryString.page * 1 || 1;
     const limit = this.queryString.limit * 1 || 100;
     const skip = (page - 1) * limit;
