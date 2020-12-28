@@ -74,3 +74,92 @@
 
 // geospatial data in mongodb
 // mongodb supports geospatial out of box
+
+
+// embedding
+// ex. tourguide document in tour document
+// See 4-natours/after-section-11/models/tourModel.js
+// tourSchema.pre('save', async function(next) {
+//   const guidesPromises = this.guides.map(async id => await User.findById(id));
+//   this.guides = await Promise.all(guidesPromises);
+//   next();
+// });
+
+// referencing
+// See 4-natours/after-section-11/models/tourModel.js
+// guides: [
+//     {
+//       type: mongoose.Schema.ObjectId,
+//       ref: 'User'
+//     }
+//   ]
+
+// Populate
+// used for reading the data. when data is referenced, with populate, it will seem like data is embedded
+// Note: populate will  create another query on the backend and it will impact peformance
+// for reference , see 4-natours/after-section-11/models/reviewModel.js
+// reviewSchema.pre(/^find/, function(next) {
+  // this.populate({
+  //   path: 'tour',
+  //   select: 'name'
+  // }).populate({
+  //   path: 'user',
+  //   select: 'name photo'
+  // });
+
+//   Parend referencing
+// this is same as child referencing
+// populate can be used here as well while querying
+// tour: {
+//     type: mongoose.Schema.ObjectId,
+//     ref: 'Tour',
+//     required: [true, 'Review must belong to a tour.']
+//   },
+//   user: {
+//     type: mongoose.Schema.ObjectId,
+//     ref: 'User',
+//     required: [true, 'Review must belong to a user']
+//   }
+
+// virtual populate
+// problem with above implementation is how do we get reviews when queryingn for tour
+// as parent doesn't know about children
+// first solution: query review first and then tour
+// 2nd solution: do child referencing in tour
+// 3rd solution: virtual populate. virtual child review are kept with tour but are not persisted
+// // Virtual populate example
+// this is saying localField _id is related to tour field in other model
+// tourSchema.virtual('reviews', {
+//     ref: 'Review',
+//     foreignField: 'tour',
+//     localField: '_id'
+//   });
+// 
+// if there are both parent and child reference - it will create circular reference
+// to avoid this, as of now, you may need to turn off one of the populate causing circular reference
+
+// Nested route
+// if two routes have clear parent child relationship
+// example - POST /tour/123456/review
+// this can be done by calling reviewController in tourRoutes
+// other way is using advance feature of express
+// mergeParams: advance feature of express to merge
+// put this in reviewRouter
+// const router = express.Router({ mergeParams: true });
+// and this in tourRoutes
+// router.use('/:tourId/reviews', reviewRouter);
+// 
+// mergeParams: now reviewRouter will have access to params of tourRoutes when called from tourRoutes
+
+// building factory function
+// refernce: 4-natours/after-section-11/controllers/handlerFactory.js
+// author has kep factory function in controller because these functions return controllers
+
+// preventing duplicate reviews
+// each user should reviw one tour only once
+// we need tour and user combination to be unique
+// it is easy to do that with indexes
+// reviewSchema.index({ tour: 1, user: 1 }, { unique: true });
+// const validator = require('validator');
+// validate: [validator.isAlpha, 'Tour name must only contain characters']
+// 
